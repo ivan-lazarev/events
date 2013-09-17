@@ -1,5 +1,5 @@
 <?php
- 
+//test
 header('Content-Type: text/html; charset=utf-8');
 
 include_once dirname(__FILE__).'/class/hierarchy.php';
