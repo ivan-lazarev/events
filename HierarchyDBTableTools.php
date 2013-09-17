@@ -1,5 +1,5 @@
 <?php
-
+ 
 class HierarchyDBTableTools {
 	
 	protected $tableName = null;
