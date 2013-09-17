@@ -1,0 +1,158 @@
+<script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU" type="text/javascript"></script>
+
+<form action="{action_url}" method="post" id="form">
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Город:  </label>
+	      <div class="controls">{select_city}</div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div>
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Место:  </label>
+	      <div class="controls">{select_place}</div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div>
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Название:  </label>
+	      <div class="controls"><input type="text" name="event_name" value="{event_name}" ></div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div>	  
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Адрес:  </label>
+	      <div class="controls"><textarea rows="3" name="event_address">{event_address}</textarea></div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div> 
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Дата начала:  </label>
+	      <div class="controls"><input type="text" name="event_start_time" value="{event_start_time}" ></div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div> 
+	  <fieldset>  
+	    <div class="cat-control-group">
+	      <label class="control-label" >Категории:  </label>
+	      	<div class="cat-controls">
+	      		<div class="contrl"><input type="text" name="event_category[1][0]" value="" ></div>	      		
+	      		<div class="action-icon"><img onclick="return add_new_cat();" src="css/icon/add.png" width="20" height="20" title="Добавить категорию"></div>
+	      	</div>
+	    </div>
+	  </fieldset>
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Длительность:  </label>
+	      <div class="controls"><input type="text" name="event_duration" value="{event_duration}" ></div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div>
+	  <div class="clear"></div>
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Описание:  </label>
+	      <div class="controls"><textarea rows="5" name="event_desc">{event_desc}</textarea></div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div> 
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Телефоны:  </label>
+	      <div class="controls"><textarea rows="5" name="event_phones">{event_phones}</textarea></div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div> 
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Стоимость:  </label>
+	      <div class="controls"><input type="text" name="event_cost_desc" value="{event_cost_desc}" ></div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div> 
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Сайт:  </label>
+	      <div class="controls"><input type="text" name="event_web_site" value="{event_web_site}" ></div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div> 
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >E-mail:  </label>
+	      <div class="controls"><input type="text" name="event_email" value="{event_email}" ></div> 
+	    </div>
+	  </fieldset>
+	  <fieldset>  
+		<div class="control-group">
+	      <label class="control-label" >Широта:  </label>
+	      <div class="controls"><input id="latitude"  type="text" name="event_latitude" value="{event_latitude}"></div> 
+	    </div>
+	</fieldset>
+	<div class="clear"></div>
+	<fieldset>  
+		<div class="control-group">
+	      <label class="control-label" >Долгота:  </label>
+	      <div class="controls"><input id="longitude"  type="text" name="event_longitude" value="{event_longitude}"></div> 
+	    </div>
+	</fieldset>
+	<div id="map" style="width:700px; height:400px"></div>
+	  <div class="clear"></div>
+	  <fieldset>
+	    <div class="control-group">              
+	      <div class="add button"><input type="submit" value="{submit_value}"></div>
+	      <div class="cancel button"><a href="admin.php?page=event">Отмена</a></div>
+	    </div>
+	  </fieldset>  
+</form>
+
+<script type="text/javascript" >
+   
+var myMap, myPlacemark;
+ymaps.ready(init);
+
+function init () {	
+	var geolocation = ymaps.geolocation,    
+        coords = [geolocation.latitude, geolocation.longitude],
+        myMap = new ymaps.Map('map', {
+            center: coords,
+            zoom: 11,
+            behaviors: ['default', 'scrollZoom']
+        });
+	
+	searchControl = new ymaps.control.SearchControl({ provider: 'yandex#publicMap',noPlacemark: true}); 
+
+	myMap.controls       
+        .add('zoomControl', { left: 5, top: 5 })        
+        .add('typeSelector')
+		.add(searchControl,{ left: 135, top: 5 })		
+        .add('mapTools', { left: 35, top: 5 });
+         
+
+	myPlacemark = new ymaps.Placemark([{latitude_on_map}, {longitude_on_map}], { iconContent: 'A'},{ draggable: true}); 
+	myMap.geoObjects.add(myPlacemark); 
+	myMap.events.add('click', function(e) { set_placemark(e, myPlacemark) }); 
+	
+}
+
+function set_placemark(e, placemark){
+    
+	var coords = e.get('coordPosition');   
+	placemark.geometry.setCoordinates(coords);
+	 
+	ymaps.geocode(coords).then(function (res) {
+    	var names = [];                
+    	res.geoObjects.each(function (obj) {
+    		names.push(obj.properties.get('name'));
+    	});
+               
+		$('#latitude:text').val(coords[0]);
+		$('#longitude:text').val(coords[1]);
+	});
+	placemark.options
+}
+</script>

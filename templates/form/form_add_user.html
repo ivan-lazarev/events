@@ -1,0 +1,29 @@
+<form action="{action_url}" method="post" id="form">
+	<div class="form-error" id="hide">{error}</div>
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Логин:  </label>
+	      <div class="controls"><input type="text" name="login"></div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div> 
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Пароль:  </label>
+	      <div class="controls"><input type="password" name="password"></div> 
+	    </div>
+	  </fieldset>
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Тип:  </label>
+	      <div class="controls">{select_type}</div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div> 
+	  <fieldset>
+	    <div class="control-group">              
+	      <div class="add button"><input type="submit" value="{submit_value}"></div>
+	      <div class="cancel button"><a href="admin.php?page=user">Отмена</a></div>
+	    </div>
+	  </fieldset>  
+</form>

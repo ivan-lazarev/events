@@ -1,0 +1,127 @@
+<script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU" type="text/javascript"></script>
+
+<form action="{action_url}" method="post" id="form">
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Город:  </label>
+	      <div class="controls">{select_city}</div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div>
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Название:  </label>
+	      <div class="controls"><input type="text" name="place_name" value="{place_name}" ></div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div>	  
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Адрес:  </label>
+	      <div class="controls"><textarea rows="3" name="place_address">{place_address}</textarea></div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div> 
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Время работы:  </label>
+	      <div class="controls">{work_time}</div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div> 
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Описание:  </label>
+	      <div class="controls"><textarea rows="5" name="place_desc">{place_desc}</textarea></div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div> 
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Телефоны:  </label>
+	      <div class="controls"><textarea rows="5" name="place_phones">{place_phones}</textarea></div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div> 
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >Сайт:  </label>
+	      <div class="controls"><input type="text" name="place_web_site" value="{place_web_site}" ></div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div> 
+	  <fieldset>  
+	    <div class="control-group">
+	      <label class="control-label" >E-mail:  </label>
+	      <div class="controls"><input type="text" name="place_email" value="{place_email}" ></div> 
+	    </div>
+	  </fieldset>
+	  <div class="clear"></div>
+	  <fieldset>  
+		<div class="control-group">
+	      <label class="control-label" >Широта:  </label>
+	      <div class="controls"><input id="latitude"  type="text" name="place_latitude" value="{place_latitude}"></div> 
+	    </div>
+	</fieldset>
+	<div class="clear"></div>
+	<fieldset>  
+		<div class="control-group">
+	      <label class="control-label" >Долгота:  </label>
+	      <div class="controls"><input id="longitude"  type="text" name="place_longitude" value="{place_longitude}"></div> 
+	    </div>
+	</fieldset>
+	<div id="map" style="width:700px; height:400px"></div>
+	  <fieldset>
+	    <div class="control-group">              
+	      <div class="add button"><input type="submit" value="{submit_value}"></div>
+	      <div class="cancel button"><a href="admin.php?page=place">Отмена</a></div>
+	    </div>
+	  </fieldset>  
+</form>
+
+<script type="text/javascript" >
+   
+var myMap, myPlacemark;
+ymaps.ready(init);
+
+function init () {	
+	var geolocation = ymaps.geolocation,    
+        coords = [geolocation.latitude, geolocation.longitude],
+        myMap = new ymaps.Map('map', {
+            center: coords,
+            zoom: 11,
+            behaviors: ['default', 'scrollZoom']
+        });
+	
+	searchControl = new ymaps.control.SearchControl({ provider: 'yandex#publicMap',noPlacemark: true}); 
+
+	myMap.controls       
+        .add('zoomControl', { left: 5, top: 5 })        
+        .add('typeSelector')
+		.add(searchControl,{ left: 135, top: 5 })		
+        .add('mapTools', { left: 35, top: 5 });
+         
+
+	myPlacemark = new ymaps.Placemark([{latitude_on_map}, {longitude_on_map}], { iconContent: 'A'},{ draggable: true}); 
+	myMap.geoObjects.add(myPlacemark); 
+	myMap.events.add('click', function(e) { set_placemark(e, myPlacemark) }); 
+	
+}
+
+function set_placemark(e, placemark){
+    
+	var coords = e.get('coordPosition');   
+	placemark.geometry.setCoordinates(coords);
+	 
+	ymaps.geocode(coords).then(function (res) {
+    	var names = [];                
+    	res.geoObjects.each(function (obj) {
+    		names.push(obj.properties.get('name'));
+    	});
+               
+		$('#latitude:text').val(coords[0]);
+		$('#longitude:text').val(coords[1]);
+	});
+	placemark.options
+}
+</script>

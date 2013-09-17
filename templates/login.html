@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="{dir_css}/login.css" type="text/css">
+<link rel="stylesheet" href="{dir_css}/animate.css" type="text/css">
+<script src="{dir_js}/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.error-group').hover(function() {
+            var a = '<img class="close" onClick="hide(\'hide\')" src="css/icon/close.png" width="15" height="15">';
+    $(this).append('<div class="error-close">'+a+'</div>');
+    }, function(){ $(this).children('.error-close').remove(); });
+});
+function hide(id) {
+	
+	$('#hide').addClass('animated bounceOut');
+	
+	setTimeout(function () {
+		document.getElementById(id).style.display='none';
+		}, 1000);
+	
+ }
+
+</script>
+<title>События</title>
+</head>
+<body>
+<div id="form">
+  <div class="form-title"><label>Вход в систему</label></div>
+  <div class="clear"></div>
+  <div class="form-error" id="hide">{error}</div>
+  <div class="form-action">
+	  <form action="admin.php?page=login" method="post">
+	    <div class="clear"></div>
+	    <fieldset>  
+	      <div class="control-group">
+	        <label class="control-label" >Логин:  </label>
+	        <div class="controls" ><input type="text" name="login" value="{login}" ></div> 
+	      </div>
+	    </fieldset> 
+	    <div class="clear"></div> 
+	    <fieldset>  
+	      <div class="control-group">
+	        <label class="control-label">Пароль:  </label>
+	        <div class="controls"><input type="password" name="pass"></div> 
+	      </div>
+	    </fieldset>
+	    <div class="clear"></div>
+	    <fieldset>
+	      <div class="control-group">              
+	        <div class="controls"><input type="submit" value="Вход"></div>
+	      </div>
+	    </fieldset>  
+	   	</form>
+  </div>
+</div>    
+</body>
+</html>

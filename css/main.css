@@ -1,0 +1,67 @@
+@CHARSET "UTF-8";
+
+body {
+	background: #bad7f9;
+}
+.navigation  {
+	overflow: hidden;
+	line-height: 30px;
+	padding: 10px 0;
+	width: 960px;
+	margin: 0 auto;
+
+}
+.container {
+	margin: 0 auto;
+	text-align: left;
+	width: 100%;
+}
+
+.navigation .exit {
+	float: right;
+	display: block; 
+}
+.navigation .user_name {
+	float: right;
+	display: block;	
+	padding: 0 5px;
+}
+.navigation a {
+	color: #191970;
+	padding: 0 5px;
+}
+.navigation a:hover {
+	text-decoration: none;
+}
+
+.content {
+	width: 960px;
+	margin: 0 auto;	
+}
+.content .left-column {
+	float: left;
+	width: 15%;
+	margin: 5px;
+}
+.left-column .item {
+	display: block;
+	padding: 3px;
+	margin: 1px 0;
+}
+.left-column .item a {
+	color: #191970;
+}
+.left-column .item a:hover {
+	text-decoration: none;
+}
+.left-column .select{
+	background-color: #e5ffff;
+}
+
+.content .rigth-column {
+	float: left;
+	width: 82%;
+	margin: 5px;
+}
+
+ 

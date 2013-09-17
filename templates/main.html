@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="{dir_css}/main.css" type="text/css">
+<script src="{dir_js}/jquery-1.9.1.js"></script>
+{rigthcolumn_css_link}
+<script type="text/javascript">
+var total = 0;
+function add_new_cat(){   
+   $('<div>')
+        .attr('id','controls-'+total)
+        .append(
+           $('<div class="contrl"><input type="text" id="controls-'+total+'" name="event_category[0]['+total+']"></div><div class="action-icon"><img onclick="$(\'#controls-'+total+'\').remove();" src="css/icon/round_del.png" width="20" height="20" title="Удалить категорию"></div>')
+         )
+     .appendTo('.cat-controls');
+   total++;};
+     
+$(document).ready(function() {
+    $('.error-group').hover(function() {
+            var a = '<img class="close" onClick="hide(\'hide\')" src="css/icon/close.png" width="15" height="15">';
+    $(this).append('<div class="error-close">'+a+'</div>');
+    }, function(){ $(this).children('.error-close').remove(); });
+    
+});
+function hide(id) {	
+	document.getElementById(id).style.display='none';	
+}
+</script>
+<title>События</title>
+</head>
+<body>
+    <div class="navigation">
+      <div class="container">
+	    <div class="exit">
+	      <a href="admin.php?page=logout">Завершить работу</a>
+	    </div>
+	    <div class="user_name"><label>Добро пожаловать, {user_name}</label></div>
+	    
+      </div>
+    </div>
+    <div class="content">
+      <div class="container">
+        <div class="left-column">
+		  <div class="left-menu">
+		    {user_div}
+		    <div class="item{select_city}"><a href="admin.php?page=city">Города</a></div>
+		    <div class="item{select_event}"><a href="admin.php?page=event">События</a></div>
+		    <div class="item{select_place}"><a href="admin.php?page=place">Места</a></div>
+		    <div class="item{select_category}"><a href="admin.php?page=category">Категории</a></div>
+		  </div>
+		</div>
+     	<div class="rigth-column">
+     	  {rightcolumn}
+     	</div>      
+      </div>
+    </div>
+</body>
+</html>

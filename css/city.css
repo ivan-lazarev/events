@@ -1,0 +1,81 @@
+@CHARSET "UTF-8";
+
+.rigth-column table {
+	width: 100%;
+	border-collapse: collapse;
+}
+th {
+	background: #6495ED;
+	font-size: 18px;
+	border: 1px solid #4169E1;
+}
+td {
+	background: #E6E6FA;
+	border: 1px solid #1E90FF;
+}
+td, th {
+	padding: 3px;
+	
+	text-align: center;
+}
+.add-button a {
+	width: 125px;
+	margin: 5px auto 0;
+	display: block;
+	
+	background-color:#4c8af5;
+	border:2px solid #004b96;
+	color:#034282;
+	font-family:Times New Roman;
+	font-size: 17px; 
+	font-weight:normal;
+	padding:7px 40px;
+	text-align: center;
+	text-decoration:none;
+}	
+.add-button a:hover {
+	cursor: pointer;
+}
+fieldset {
+	border-bottom: 0 white solid;
+	border-top: 0 white solid;
+	border-left: 0;
+	border-right: 0;
+	margin: 0;
+	padding: 2px 0;
+}
+.pages {
+	padding: 5px;
+} 
+.pages span {
+	padding: 5px;
+}  
+.pages a {
+	color: #191970;
+	padding: 5px;
+}
+.pages a:hover {
+	text-decoration: none;
+}
+
+.rigth-column .control-group {
+	width: 300px;
+	clear: both;
+}
+.control-group .control-label {
+	float: left;
+	color: #191970;
+	width: 100px;
+}
+.control-group .controls {
+	float: left;
+	width: 190px;
+}
+.controls input {
+	width: 98%;	
+}
+.control-group .button {
+	float: left;
+	margin: 5px 10px;	
+}
+
